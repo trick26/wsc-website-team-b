@@ -13,65 +13,86 @@ using System.Web.UI.HtmlControls;
 /// </summary>
 public class Client
 {
-    DataSet dataSet = new DataSet();
-    DataSet.clientsRow theClient;
     
     public Client()
 	{
-		//
-		// TODO: Add constructor logic here
-		//
+        // default constructor
 	}
 
-    public int ClientId
+    public Client(int id, String name, String address, String city, String state, String zip, String phone, String contactName)
     {
-        get { return theClient.clientId; }
+        this.ID = id;
+        this.Name = name;
+        this.Address = address;
+        this.City = city;
+        this.State = state;
+        this.Zip = zip;
+        this.Phone = phone;
+        this.ContactName = contactName;
     }
 
-    public void LoadClientById(int clientId)
+    private int _id;
+
+    public int ID
     {
-        theClient = dataSet.clients.FindByclientId(clientId);
+        get { return _id; }
+        set { _id = value; }
     }
 
-    public String ClientName
+    private String _name;
+
+    public String Name
     {
-        get { return theClient.clientName; }
-        set { theClient.clientName = value; }
+        get { return _name; }
+        set { _name = value; }
     }
 
-    public String ClientAddress
+    private String _address;
+
+    public String Address
     {
-        get { return theClient.clientAddress; }
-        set { theClient.clientAddress = value; }
-    }
-	
-    public String ClientCity
-    {
-        get { return theClient.clientCity; }
-        set { theClient.clientCity = value; }
+        get { return _address; }
+        set { _address = value; }
     }
 
-    public String ClientState
+    private String _city;
+
+    public String City
     {
-        get { return theClient.clientState; }
-        set { theClient.clientState = value; }
+        get { return _city; }
+        set { _city = value; }
     }
 
-    public String ClientZip
+    private String _state;
+
+    public String State
     {
-        get { return theClient.clientZip; }
-        set { theClient.clientZip = value; }
+        get { return _state; }
+        set { _state = value; }
     }
 
-    public String ClientPhone
+    private String _zip;
+
+    public String Zip
     {
-        get { return theClient.clientPhone; }
-        set { theClient.clientPhone = value; }
+        get { return _zip; }
+        set { _zip = value; }
     }
 
-    public String ClientContactName
+    private String _phone;
+
+    public String Phone
     {
-        get { return theClient.clientContactName; }
-        set { theClient.clientContactName = value; }
+        get { return _phone; }
+        set { _phone = value; }
     }
+
+    private String _contactName;
+
+    public String ContactName
+    {
+        get { return _contactName; }
+        set { _contactName = value; }
+    }
+
 }
