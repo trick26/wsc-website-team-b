@@ -16,11 +16,12 @@ public class ClientsComponent
 {
 	public ClientsComponent()
 	{
-		//
-		// TODO: Add constructor logic here
-		//
 	}
 
+    /// <summary>
+    /// Gets all clients from database
+    /// </summary>
+    /// <returns>List Generic Class</returns>
     public List<Client> GetClients()
     {
         List<Client> clients = new List<Client>();
@@ -50,12 +51,17 @@ public class ClientsComponent
         return clients;
     }
 
+    /// <summary>
+    /// Get a single client from the database
+    /// </summary>
+    /// <param name="id">The ID of the client to find</param>
+    /// <returns>a Client if found; null if client not found</returns>
     public Client GetClientById(int id)
     {
         DataSet ds = new DataSet();
         DataSetTableAdapters.clientsTableAdapter adapter = new DataSetTableAdapters.clientsTableAdapter();
         adapter.Fill(ds.clients);
-        Client c; // null!
+        Client c = new Client();
         
         // find the client
         DataSet.clientsDataTable table = adapter.GetClientById(id);
@@ -63,10 +69,8 @@ public class ClientsComponent
         // if a client was found, then fill in the details 
         if (table.Rows.Count > 0)
 	    {
-            c = new Client();
-            DataSet.clientsRow row = new DataRow();
             // use the 1st row's data
-            row = table.rows[0];
+            DataSet.clientsRow row = (DataSet.clientsRow) table.Rows[0];
             c.ID = row.clientId;
             c.Name = row.clientName;
             c.Address = row.clientAddress;
@@ -75,47 +79,93 @@ public class ClientsComponent
             c.Zip = row.clientZip;
             c.Phone = row.clientPhone;
             c.ContactName = row.clientContactName;
-	    }
-        // returns a client if a client w/ id was found, otherwise returns null
-        return c;
+            return c;
+        }
+        else
+        {
+            return null;
+        }
     }
 
+    /// <summary>
+    /// Update a client to the database
+    /// </summary>
+    /// <param name="c">a client</param>
+    /// <returns># of rows affected</returns>
     public int UpdateClient(Client c)
     {
-        UpdateClient(c.id, c.name, c.address, c.city, c.state, c.zip, c.phone, c.contactName);
+        return UpdateClient(c.ID, c.Name, c.Address, c.City, c.State, c.Zip, c.Phone, c.ContactName);
     }
 
+    /// <summary>
+    /// Update a client to the database
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="address"></param>
+    /// <param name="city"></param>
+    /// <param name="state"></param>
+    /// <param name="zip"></param>
+    /// <param name="phone"></param>
+    /// <param name="contactName"></param>
+    /// <returns># of rows affected</returns>
     public int UpdateClient(int id, String name, String address, String city, String state, String zip, String phone, String contactName)
     {
         DataSet ds = new DataSet();
         DataSetTableAdapters.clientsTableAdapter adapter = new DataSetTableAdapters.clientsTableAdapter();
 
-        adapter.Update(name, address, city, state, zip, phone, contactName, id);
+        return adapter.Update(name, address, city, state, zip, phone, contactName, id);
     }
 
+    /// <summary>
+    /// Insert a new client into the database
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public int InsertClient(Client c)
     {
-        InsertClient(c.name, c.address, c.city, c.state, c.zip, c.phone, c.contactName);
+        return InsertClient(c.Name, c.Address, c.City, c.State, c.Zip, c.Phone, c.ContactName);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="address"></param>
+    /// <param name="city"></param>
+    /// <param name="state"></param>
+    /// <param name="zip"></param>
+    /// <param name="phone"></param>
+    /// <param name="contactName"></param>
+    /// <returns></returns>
     public int InsertClient(String name, String address, String city, String state, String zip, String phone, String contactName)
     {
         DataSet ds = new DataSet();
         DataSetTableAdapters.clientsTableAdapter adapter = new DataSetTableAdapters.clientsTableAdapter();
 
-        adapter.Insert(name, address, city, state, zip, phone, contactName);
+        return adapter.Insert(name, address, city, state, zip, phone, contactName);
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public int DeleteClient(Client c)
     {
-        DeleteClient(c.ID);
+        return DeleteClient(c.ID);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="clientId"></param>
+    /// <returns></returns>
     public int DeleteClient(int clientId)
     {
         DataSet ds = new DataSet();
         DataSetTableAdapters.clientsTableAdapter adapter = new DataSetTableAdapters.clientsTableAdapter();
 
-        adapter.Delete(clientId);
+        return adapter.Delete(clientId);
     }
 }

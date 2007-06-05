@@ -16,7 +16,6 @@ public class Client
     
     public Client()
 	{
-        // default constructor
 	}
 
     public Client(int id, String name, String address, String city, String state, String zip, String phone, String contactName)
