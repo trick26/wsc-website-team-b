@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSCOrder", "http://localhost/WSCOrder/WSCOrder.csproj", "{B1B6E784-0E8A-4B80-84F0-BC45A58A9BDD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{B1B6E784-0E8A-4B80-84F0-BC45A58A9BDD}.Debug.ActiveCfg = Debug|.NET
+		{B1B6E784-0E8A-4B80-84F0-BC45A58A9BDD}.Debug.Build.0 = Debug|.NET
+		{B1B6E784-0E8A-4B80-84F0-BC45A58A9BDD}.Release.ActiveCfg = Release|.NET
+		{B1B6E784-0E8A-4B80-84F0-BC45A58A9BDD}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
