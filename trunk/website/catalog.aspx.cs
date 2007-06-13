@@ -15,4 +15,13 @@ public partial class catalog : System.Web.UI.Page
     {
 
     }
+
+    protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        if (e.CommandName == "GetDetails")
+        {
+            HiddenField h = (HiddenField)e.Item.FindControl("hiddenItemId");
+            Response.Redirect("itemdetails.aspx?item=" + h.Value);
+        }
+    }
 }

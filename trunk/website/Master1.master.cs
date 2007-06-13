@@ -40,7 +40,7 @@ public partial class Master1 : System.Web.UI.MasterPage
             // update display so user knows they're not logged in
             btnLogin.Text = "Login";
             lblWelcome.Visible = false;
-            //Response.Redirect(Request.Url.AbsolutePath);
+            Response.Redirect(Request.Url.AbsolutePath);
         }
         else
         {

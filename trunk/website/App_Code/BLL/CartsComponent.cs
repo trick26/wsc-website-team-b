@@ -33,9 +33,7 @@ namespace BLL
             {
                 // create memory for new cart & fill in properties
                 Cart c = new Cart();
-                c.UserName = row.userName;
-                c.Details = row.details;
-                c.CatalogId = row.catalogId;
+                c = FillCart(row);
 
                 // add this cart to the list
                 carts.Add(c);
@@ -64,9 +62,7 @@ namespace BLL
             {
                 // use the 1st row's data
                 DataSet.cartsRow row = (DataSet.cartsRow)table.Rows[0];
-                c.UserName = row.userName;
-                c.Details = row.details;
-                c.CatalogId = row.catalogId;
+                c = FillCart(row);
                 return c;
             }
             else
@@ -112,6 +108,23 @@ namespace BLL
             DataSetTableAdapters.cartsTableAdapter adapter = new DataSetTableAdapters.cartsTableAdapter();
 
             return adapter.Delete(userName);
+        }
+
+        private Cart FillCart(DataSet.cartsRow row)
+        {
+            Cart c = new Cart();
+            c.UserName = row.userName;
+            c.CatalogId = row.catalogId;
+            try
+            {
+                c.Details = row.details;
+            }
+            catch (StrongTypingException)
+            {
+                c.Details = "";
+            }
+
+            return c;
         }
     }
 }

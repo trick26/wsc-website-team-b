@@ -40,7 +40,14 @@ public partial class login : System.Web.UI.Page
                 Response.Cookies["userName"].Value = user.Name;
                 Response.Cookies["userName"].Expires = DateTime.Now.AddHours(2);
                 // send browser back to previous page
-                Response.Redirect(Request.Params["ret"]);
+                if (Request.Params["ret"] != null)
+                {
+                    Response.Redirect(Request.Params["ret"]);
+                }
+                else
+                {
+                    Response.Redirect("default.aspx");
+                }
             }
             else
             {
