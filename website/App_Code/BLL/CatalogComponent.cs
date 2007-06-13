@@ -9,148 +9,151 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 
-/// <summary>
-/// Summary description for CatalogComponent
-/// </summary>
-public class CatalogComponent
+namespace BLL
 {
-	public CatalogComponent()
-	{
-	}
-
     /// <summary>
-    /// 
+    /// Summary description for CatalogComponent
     /// </summary>
-    /// <returns></returns>
-    public List<Item> GetItems()
+    public class CatalogComponent
     {
-        List<Item> items = new List<Item>();
-        DataSet ds = new DataSet();
-        DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
-        adapter.Fill(ds.catalog);
-        DataSet.catalogDataTable table = adapter.GetCatalogData();
-
-        // load all items into the list
-        foreach (DataSet.catalogRow row in table.Rows)
+        public CatalogComponent()
         {
-            // create memory for new item & fill in properties
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<Item> GetItems()
+        {
+            List<Item> items = new List<Item>();
+            DataSet ds = new DataSet();
+            DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
+            adapter.Fill(ds.catalog);
+            DataSet.catalogDataTable table = adapter.GetCatalogData();
+
+            // load all items into the list
+            foreach (DataSet.catalogRow row in table.Rows)
+            {
+                // create memory for new item & fill in properties
+                Item it = new Item();
+                it.ID = row.catalogId;
+                it.Description = row.description;
+                it.Photo = row.photo;
+                it.Price = row.price;
+
+                // add this item to the list
+                items.Add(it);
+            }
+            // returns the list w/ 0 or more items
+            return items;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>An Item if found; null if not found</returns>
+        public Item GetItemById(int id)
+        {
+            DataSet ds = new DataSet();
+            DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
+            adapter.Fill(ds.catalog);
             Item it = new Item();
-            it.ID = row.catalogId;
-            it.Description = row.description;
-            it.Photo = row.photo;
-            it.Price = row.price;
 
-            // add this item to the list
-            items.Add(it);
+            // find the item
+            DataSet.catalogDataTable table = adapter.GetItemById(id);
+
+            // if an item was found, then fill in the details 
+            if (table.Rows.Count > 0)
+            {
+                // use the 1st row's data
+                DataSet.catalogRow row = (DataSet.catalogRow)table.Rows[0];
+                it.ID = row.catalogId;
+                it.Description = row.description;
+                it.Photo = row.photo;
+                it.Price = row.price;
+                return it;
+            }
+            else
+            {
+                return null;
+            }
+
         }
-        // returns the list w/ 0 or more items
-        return items;
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns>An Item if found; null if not found</returns>
-    public Item GetItemById(int id)
-    {
-        DataSet ds = new DataSet();
-        DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
-        adapter.Fill(ds.catalog);
-        Item it = new Item();
-
-        // find the item
-        DataSet.catalogDataTable table = adapter.GetItemById(id);
-
-        // if an item was found, then fill in the details 
-        if (table.Rows.Count > 0)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="it"></param>
+        /// <returns></returns>
+        public int UpdateItem(Item it)
         {
-            // use the 1st row's data
-            DataSet.catalogRow row = (DataSet.catalogRow) table.Rows[0];
-            it.ID = row.catalogId;
-            it.Description = row.description;
-            it.Photo = row.photo;
-            it.Price = row.price;
-            return it;
+            return UpdateItem(it.ID, it.Description, it.Photo, it.Price);
         }
-        else
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="description"></param>
+        /// <param name="photo"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public int UpdateItem(int id, String description, String photo, double price)
         {
-            return null;
+            DataSet ds = new DataSet();
+            DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
+
+            return adapter.Update(description, photo, price, id);
         }
 
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="it"></param>
+        /// <returns></returns>
+        public int InsertItem(Item it)
+        {
+            return InsertItem(it.Description, it.Photo, it.Price);
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="it"></param>
-    /// <returns></returns>
-    public int UpdateItem(Item it)
-    {
-        return UpdateItem(it.ID, it.Description, it.Photo, it.Price);
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        /// <param name="photo"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public int InsertItem(String description, String photo, double price)
+        {
+            DataSet ds = new DataSet();
+            DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="description"></param>
-    /// <param name="photo"></param>
-    /// <param name="price"></param>
-    /// <returns></returns>
-    public int UpdateItem(int id, String description, String photo, double price)
-    {
-        DataSet ds = new DataSet();
-        DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
+            return adapter.Insert(description, photo, price);
+        }
 
-        return adapter.Update(description, photo, price, id);
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="it"></param>
+        /// <returns></returns>
+        public int DeleteItem(Item it)
+        {
+            return DeleteItem(it.ID);
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="it"></param>
-    /// <returns></returns>
-    public int InsertItem(Item it)
-    {
-        return InsertItem(it.Description, it.Photo, it.Price);
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="catalogId"></param>
+        /// <returns></returns>
+        public int DeleteItem(int catalogId)
+        {
+            DataSet ds = new DataSet();
+            DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="description"></param>
-    /// <param name="photo"></param>
-    /// <param name="price"></param>
-    /// <returns></returns>
-    public int InsertItem(String description, String photo, double price)
-    {
-        DataSet ds = new DataSet();
-        DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
-
-        return adapter.Insert(description, photo, price);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="it"></param>
-    /// <returns></returns>
-    public int DeleteItem(Item it)
-    {
-        return DeleteItem(it.ID);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="catalogId"></param>
-    /// <returns></returns>
-    public int DeleteItem(int catalogId)
-    {
-        DataSet ds = new DataSet();
-        DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
-
-        return adapter.Delete(catalogId);
+            return adapter.Delete(catalogId);
+        }
     }
 }

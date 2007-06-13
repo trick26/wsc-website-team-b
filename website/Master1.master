@@ -1,0 +1,42 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Master1.master.cs" Inherits="Master1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header">
+            <img src="images/logo.gif" />
+            <div id="headerNav">
+                <table style="width: 100%; border-top-style: none; border-right-style: none; border-left-style: none;
+                    border-bottom-style: none">
+                    <tr>
+                        <td>
+                            <asp:HyperLink ID="linkHome" runat="server" NavigateUrl="default.aspx">Home</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="linkCatalog" runat="server" NavigateUrl="catalog.aspx">Catalog</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="linkMyAccount" runat="server" NavigateUrl="account.aspx">My Account</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="linkShoppingCart" runat="server" NavigateUrl="cart.aspx">Shopping Cart</asp:HyperLink>
+                        </td>
+                        <td style="text-align: right;">
+                            <asp:Label ID="lblWelcome" runat="server" Text="Welcome username!" Visible="False"></asp:Label>
+                            <asp:LinkButton ID="btnLogin" runat="server" OnClick="btnLogin_Click">Login</asp:LinkButton></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="mainWrapper">
+            <div id="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div id="footer">
+            &copy; 2007 Williams Specialty Company</div>
+    </form>
+</body>
+</html>
