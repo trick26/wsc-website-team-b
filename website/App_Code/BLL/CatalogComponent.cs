@@ -39,7 +39,9 @@ namespace BLL
                 Item it = new Item();
                 it.ID = row.catalogId;
                 it.Description = row.description;
+                it.Notes = row.notes;
                 it.Photo = row.photo;
+                it.ThumbPhoto = row.thumbPhoto;
                 it.Price = row.price;
 
                 // add this item to the list
@@ -71,7 +73,9 @@ namespace BLL
                 DataSet.catalogRow row = (DataSet.catalogRow)table.Rows[0];
                 it.ID = row.catalogId;
                 it.Description = row.description;
+                it.Notes = row.notes;
                 it.Photo = row.photo;
+                it.ThumbPhoto = row.thumbPhoto;
                 it.Price = row.price;
                 return it;
             }
@@ -82,72 +86,37 @@ namespace BLL
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="it"></param>
-        /// <returns></returns>
         public int UpdateItem(Item it)
         {
-            return UpdateItem(it.ID, it.Description, it.Photo, it.Price);
+            return UpdateItem(it.ID, it.Description, it.Notes, it.ThumbPhoto, it.Photo, it.Price);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="description"></param>
-        /// <param name="photo"></param>
-        /// <param name="price"></param>
-        /// <returns></returns>
-        public int UpdateItem(int id, String description, String photo, double price)
+        public int UpdateItem(int id, String description, String notes, String photo, String thumbPhoto, double price)
         {
             DataSet ds = new DataSet();
             DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
 
-            return adapter.Update(description, photo, price, id);
+            return adapter.Update(description, notes, photo, thumbPhoto, price, id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="it"></param>
-        /// <returns></returns>
         public int InsertItem(Item it)
         {
-            return InsertItem(it.Description, it.Photo, it.Price);
+            return InsertItem(it.Description, it.Notes, it.Photo, it.ThumbPhoto, it.Price);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="description"></param>
-        /// <param name="photo"></param>
-        /// <param name="price"></param>
-        /// <returns></returns>
-        public int InsertItem(String description, String photo, double price)
+        public int InsertItem(String description, String notes, String photo, String thumbPhoto, double price)
         {
             DataSet ds = new DataSet();
             DataSetTableAdapters.catalogTableAdapter adapter = new DataSetTableAdapters.catalogTableAdapter();
 
-            return adapter.Insert(description, photo, price);
+            return adapter.Insert(description, notes, photo, thumbPhoto, price);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="it"></param>
-        /// <returns></returns>
         public int DeleteItem(Item it)
         {
             return DeleteItem(it.ID);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="catalogId"></param>
-        /// <returns></returns>
         public int DeleteItem(int catalogId)
         {
             DataSet ds = new DataSet();

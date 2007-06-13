@@ -43,6 +43,14 @@ namespace BLL
             set { _description = value; }
         }
 
+        private String _notes;
+
+        public String Notes
+        {
+            get { return _notes; }
+            set { _notes = value; }
+        }
+
         private String _photo;
 
         public String Photo
