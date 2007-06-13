@@ -8,70 +8,73 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-/// <summary>
-/// Summary description for Order
-/// </summary>
-public class Order
+namespace BLL
 {
-	public Order()
-	{
-	}
-
-    public Order(int id, int catalogId, int clientId, int paymentId, String details, double price)
+    /// <summary>
+    /// Summary description for Order
+    /// </summary>
+    public class Order
     {
-        this.ID = id;
-        this.CatalogId = catalogId;
-        this.ClientId = clientId;
-        this.PaymentId = paymentId;
-        this.Details = details;
-        this.Price = price;
-    }
+        public Order()
+        {
+        }
 
-    private int _id;
+        public Order(int id, int catalogId, int clientId, int paymentId, String details, double price)
+        {
+            this.ID = id;
+            this.CatalogId = catalogId;
+            this.ClientId = clientId;
+            this.PaymentId = paymentId;
+            this.Details = details;
+            this.Price = price;
+        }
 
-    public int ID
-    {
-        get { return _id; }
-        set { _id = value; }
-    }
+        private int _id;
 
-    private int _catalogId;
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
-    public int CatalogId
-    {
-        get { return _catalogId; }
-        set { _catalogId = value; }
-    }
+        private int _catalogId;
 
-    private int _clientId;
+        public int CatalogId
+        {
+            get { return _catalogId; }
+            set { _catalogId = value; }
+        }
 
-    public int ClientId
-    {
-        get { return _clientId; }
-        set { _clientId = value; }
-    }
+        private int _clientId;
 
-    private int _paymentId;
+        public int ClientId
+        {
+            get { return _clientId; }
+            set { _clientId = value; }
+        }
 
-    public int PaymentId
-    {
-        get { return _paymentId; }
-        set { _paymentId = value; }
-    }
+        private int _paymentId;
 
-    private String _details;
+        public int PaymentId
+        {
+            get { return _paymentId; }
+            set { _paymentId = value; }
+        }
 
-    public String Details
-    {
-        get { return _details; }
-        set { _details = value; }
-    }
+        private String _details;
 
-    private double _price;
+        public String Details
+        {
+            get { return _details; }
+            set { _details = value; }
+        }
 
-    public double Price
-    {
-        get { return _price; }
-        set { _price = value; }
+        private double _price;
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
     }
 }
