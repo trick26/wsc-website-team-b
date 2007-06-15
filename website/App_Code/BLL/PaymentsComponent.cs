@@ -102,7 +102,11 @@ namespace BLL
             DataSet ds = new DataSet();
             DataSetTableAdapters.paymentsTableAdapter adapter = new DataSetTableAdapters.paymentsTableAdapter();
 
-            return adapter.Insert(cardholderName, cardType, cardNumber, cardExpiration);
+            adapter.Insert(cardholderName, cardType, cardNumber, cardExpiration);
+            // this is a *bad* way of getting the record's identity, but MS Access doesn't support batch SQL statements
+            // a real DB would be able to combine the insert statement and a select statement in one batch call!
+            int identity = (int)adapter.GetIdentity();
+            return identity;
         }
 
         public int DeletePayment(Payment p)

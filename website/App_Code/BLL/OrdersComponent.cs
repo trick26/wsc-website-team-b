@@ -133,7 +133,11 @@ namespace BLL
             DataSet ds = new DataSet();
             DataSetTableAdapters.ordersTableAdapter adapter = new DataSetTableAdapters.ordersTableAdapter();
 
-            return adapter.Insert(catalogId, clientId, paymentId, details, price);
+            adapter.Insert(catalogId, clientId, paymentId, details, price);
+            // this is a *bad* way of getting the record's identity, but MS Access doesn't support batch SQL statements
+            // a real DB would be able to combine the insert statement and a select statement in one batch call!
+            int identity = (int)adapter.GetIdentity();
+            return identity;
         }
 
         public int DeleteOrder(Order o)

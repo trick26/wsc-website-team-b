@@ -13,6 +13,11 @@ public partial class account : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // make sure user is logged in
+        if (Request.Cookies["userName"] == null)
+        {
+            Response.Redirect("login.aspx?ret=" + Request.Url.LocalPath);
+        }
 
     }
 }
