@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Master1.master" AutoEventWireup="true" CodeFile="cart.aspx.cs" Inherits="cart" Title="Untitled Page" %>
+<%@ Page Language="C#" MasterPageFile="~/Master1.master" AutoEventWireup="true" CodeFile="cart.aspx.cs" Inherits="cart" Title="WSC :: Shopping Cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     &nbsp;<div style="width: 90%">
     <table style="border-top-width: 1px; border-left-width: 1px; border-left-color: navy; border-bottom-width: 1px; border-bottom-color: navy; border-top-color: navy; border-collapse: collapse; border-right-width: 1px; border-right-color: navy; width: 100%;">
@@ -37,7 +37,8 @@
                 <td>
                 </td>
                 <td style="text-align: right">
-                    &nbsp;<asp:Button ID="btnOrder" runat="server" OnClick="btnOrder_Click" Text="Order Now" /></td>
+                    &nbsp;<asp:Button ID="btnOrder" runat="server" Font-Bold="True" ForeColor="Maroon"
+                        OnClick="btnOrder_Click" Text="Order Now" /></td>
             </tr>
             <tr>
                 <td>
@@ -45,7 +46,9 @@
                 <td>
                 </td>
                 <td style="text-align: right">
-                    <asp:Button ID="btnSaveCart" runat="server" OnClick="btnSaveCart_Click" Text="Save Cart" /></td>
+                    <asp:Button ID="btnSaveCart" runat="server" Text="Save Cart" OnClick="btnSaveCart_Click" /><br />
+                    <asp:Button ID="btnEmptyCart" runat="server" OnClick="btnEmptyCart_Click" Text="Empty Cart" />
+                </td>
             </tr>
         </table>
         <asp:HiddenField ID="hiddenItemId" runat="server" />

@@ -18,6 +18,7 @@ public partial class catalog : System.Web.UI.Page
 
     protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
     {
+        // go to the item's detail web page
         if (e.CommandName == "GetDetails")
         {
             HiddenField h = (HiddenField)e.Item.FindControl("hiddenItemId");

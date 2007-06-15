@@ -42,7 +42,16 @@ public partial class login : System.Web.UI.Page
                 // send browser back to previous page
                 if (Request.Params["ret"] != null)
                 {
-                    Response.Redirect(Request.Params["ret"]);
+                    String qStr = Request.QueryString["ret"];
+                    // we must re-assemble the query string
+                    if (Request.QueryString.Count > 1)
+                        qStr += "?";
+                    for (int i = 1; i < Request.QueryString.Count; i++)
+			        {
+                        qStr += Request.QueryString.GetKey(i) + "=" + Request.QueryString.Get(i) + "&";
+                    }
+                    qStr = qStr.TrimEnd('&');
+                    Response.Redirect(qStr);
                 }
                 else
                 {
