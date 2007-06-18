@@ -79,6 +79,7 @@ public partial class order : System.Web.UI.Page
             o.Details = c.Details;
             o.PaymentId = pmtId;
             o.Price = it.Price;
+            o.OrderDate = DateTime.Now;
             // save the order
             int orderId = orders.InsertOrder(o);
 
@@ -95,6 +96,9 @@ public partial class order : System.Web.UI.Page
 
     private bool ValidatePayment()
     {
+        // this *only* verifies that the textboxes and dropdownlists are not blank!
+        // a real-world application would also test for proper input types, 
+        // like numbers only at the proper length for credit card data
         bool valid = true;
         if (txtName.Text == "")
         {
@@ -121,7 +125,10 @@ public partial class order : System.Web.UI.Page
             valid = false;
             lblError.Text = "The credit card 'year' field is not valid!";
         }
-        lblError.Visible = true;
+        if (!valid)
+        {
+            lblError.Visible = true;
+        }
         return valid;
     }
 }
