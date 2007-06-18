@@ -37,6 +37,7 @@ namespace BLL
                 o.CatalogId = row.catalogId;
                 o.ClientId = row.clientId;
                 o.PaymentId = row.paymentId;
+                o.OrderDate = row.orderDate;
                 o.Details = row.details;
                 o.Price = row.price;
 
@@ -71,6 +72,7 @@ namespace BLL
                 o.CatalogId = row.catalogId;
                 o.ClientId = row.clientId;
                 o.PaymentId = row.paymentId;
+                o.OrderDate = row.orderDate;
                 o.Details = row.details;
                 o.Price = row.price;
                 return o;
@@ -100,6 +102,7 @@ namespace BLL
                 o.CatalogId = row.catalogId;
                 o.ClientId = row.clientId;
                 o.PaymentId = row.paymentId;
+                o.OrderDate = row.orderDate;
                 o.Details = row.details;
                 o.Price = row.price;
 
@@ -112,28 +115,28 @@ namespace BLL
 
         public int UpdateOrder(Order o)
         {
-            return UpdateOrder(o.ID, o.CatalogId, o.ClientId, o.PaymentId, o.Details, o.Price);
+            return UpdateOrder(o.ID, o.CatalogId, o.ClientId, o.PaymentId, o.OrderDate, o.Details, o.Price);
         }
 
-        public int UpdateOrder(int orderId, int catalogId, int clientId, int paymentId, String details, double price)
+        public int UpdateOrder(int orderId, int catalogId, int clientId, int paymentId, DateTime orderDate, String details, double price)
         {
             DataSet ds = new DataSet();
             DataSetTableAdapters.ordersTableAdapter adapter = new DataSetTableAdapters.ordersTableAdapter();
 
-            return adapter.Update(catalogId, clientId, paymentId, details, price, orderId);
+            return adapter.Update(catalogId, clientId, paymentId, orderDate, details, price, orderId);
         }
 
         public int InsertOrder(Order o)
         {
-            return InsertOrder(o.CatalogId, o.ClientId, o.PaymentId, o.Details, o.Price);
+            return InsertOrder(o.CatalogId, o.ClientId, o.PaymentId, o.OrderDate, o.Details, o.Price);
         }
 
-        public int InsertOrder(int catalogId, int clientId, int paymentId, String details, double price)
+        public int InsertOrder(int catalogId, int clientId, int paymentId, DateTime orderDate, String details, double price)
         {
             DataSet ds = new DataSet();
             DataSetTableAdapters.ordersTableAdapter adapter = new DataSetTableAdapters.ordersTableAdapter();
 
-            adapter.Insert(catalogId, clientId, paymentId, details, price);
+            adapter.Insert(catalogId, clientId, paymentId, orderDate, details, price);
             // this is a *bad* way of getting the record's identity, but MS Access doesn't support batch SQL statements
             // a real DB would be able to combine the insert statement and a select statement in one batch call!
             int identity = (int)adapter.GetIdentity();

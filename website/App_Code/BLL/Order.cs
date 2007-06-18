@@ -61,6 +61,14 @@ namespace BLL
             set { _paymentId = value; }
         }
 
+        private DateTime _orderDate;
+
+        public DateTime OrderDate
+        {
+            get { return _orderDate; }
+            set { _orderDate = value; }
+        }
+	
         private String _details;
 
         public String Details
