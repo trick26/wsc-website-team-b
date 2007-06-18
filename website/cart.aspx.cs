@@ -85,7 +85,7 @@ public partial class cart : System.Web.UI.Page
         imgThumbPhoto.Visible = show;
         lblDescription.Visible = show;
         lblItemPrice.Visible = show;
-        //txtDetails.Enabled = show;
+        txtDetails.ReadOnly = !show;
         btnOrder.Visible = show;
         btnSaveCart.Visible = show;
         btnEmptyCart.Visible = show;
